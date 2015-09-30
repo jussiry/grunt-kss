@@ -34,8 +34,12 @@ module.exports = function (grunt) {
     kssCmd.push(realPath + 'node_modules/kss/bin/kss-node');
 
     this.files.forEach(function (file) {
-      kssCmd.push("\"" + file.src[0] + "\"");
-      kssCmd.push("\"" + file.dest + "\"");
+      file.src.forEach(function(src) {
+        kssCmd.push("--source");
+        kssCmd.push("'" + src + "'");
+      });
+      kssCmd.push("--destination");
+      kssCmd.push("'" + file.dest + "'");
       dest = file.dest;
     });
 
